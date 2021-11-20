@@ -1,32 +1,122 @@
 <template>
-    <div class="slds-form" role="list">
-        <div class="slds-form__row">
-        <div class="slds-form__item" role="listitem">
-        <div class="slds-form-element slds-form-element_horizontal slds-is-editing">
-        <label class="slds-form-element__label" for="single-form-element-id-02">Label</label>
-        <div class="slds-form-element__control">
-        <input type="text" id="single-form-element-id-02" placeholder="Placeholder text…" class="slds-input" />
+    <article class="slds-card">
+        <div class="slds-card__body slds-card__body_inner">
+            <!-- Body -->
+            <div class="slds-form form slds-var-p-top_small">
+                <div class="slds-form-element slds-form-element_horizontal slds-form-element_1-col">
+                    <label class="slds-form-element__label" for="to">To</label>
+                    <div class="slds-form-element__control">
+                        <div class="slds-combobox_container">
+                            <div class={boxClass}>
+                                <div class="slds-combobox__form-element slds-has-focus">
+                                    <template for:each={selectedValues} for:item="selectedValue" for:index="index">
+                                        <lightning-pill
+                                            key={selectedValue}
+                                            label={selectedValue}
+                                            onremove={handleRemove}
+                                            data-index={index}
+                                        ></lightning-pill>
+                                    </template>
+
+                                    <input
+                                        type="text"
+                                        id="to"
+                                        class="input"
+                                        onkeyup={handleInputChange}
+                                        onblur={handleBlur}
+                                        value={searchTerm}
+                                    />
+                                </div>
+                                <!-- List Start -->
+                                <div
+                                    id="listbox-id-3"
+                                    class="slds-dropdown slds-dropdown_length-with-icon-7 slds-dropdown_fluid"
+                                    role="listbox"
+                                    if:true={hasItems}
+                                >
+                                    <ul class="slds-listbox slds-listbox_vertical" role="presentation">
+                                        <template for:each={items} for:item="item" for:index="index">
+                                            <li
+                                                key={item.Id}
+                                                data-id={item.Id}
+                                                onclick={onSelect}
+                                                role="presentation"
+                                                class="slds-listbox__item"
+                                            >
+                                                <div
+                                                    aria-selected="true"
+                                                    class="
+                                                        slds-media
+                                                        slds-listbox__option
+                                                        slds-listbox__option_entity
+                                                        slds-listbox__option_has-meta
+                                                    "
+                                                    role="option"
+                                                    tabindex="0"
+                                                >
+                                                    <span class="slds-media__figure slds-listbox__option-icon">
+                                                        <span class="slds-icon_container slds-icon-standard-account">
+                                                            <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                                                                <use
+                                                                    xlink:href="/assets/icons/standard-sprite/svg/symbols.svg#account"
+                                                                ></use>
+                                                            </svg>
+                                                        </span>
+                                                    </span>
+                                                    <span class="slds-media__body">
+                                                        <span
+                                                            class="
+                                                                slds-listbox__option-text
+                                                                slds-listbox__option-text_entity
+                                                            "
+                                                            >{item.Name}</span
+                                                        >
+                                                        <span
+                                                            class="
+                                                                slds-listbox__option-meta
+                                                                slds-listbox__option-meta_entity
+                                                            "
+                                                            >{item.Email}</span
+                                                        >
+                                                    </span>
+                                                </div>
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
+                                <!-- List End -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-form-element slds-form-element_horizontal slds-form-element_1-col">
+                    <label class="slds-form-element__label" for="cc">Cc</label>
+                    <div class="slds-form-element__control">
+                        <input type="text" id="cc" class="input" />
+                    </div>
+                </div>
+
+                <div class="slds-form-element">
+                    <label class="slds-form-element__label" for="subject"> </label>
+                    <div class="slds-form-element__control">
+                        <input type="text" id="subject" placeholder="Subject..." class="slds-input" />
+                    </div>
+                </div>
+
+                <div class="slds-form-element">
+                    <!-- <label class="slds-form-element__label" for="body">Body</label>
+                    <div class="slds-form-element__control">
+                        <textarea id="body" class="slds-textarea"></textarea>
+                    </div> -->
+                    <div class="slds-form-element__control slds-var-p-top_small">
+                        <lightning-input-rich-text value={myVal}> </lightning-input-rich-text>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
-        </div>
-        <div class="slds-form__item" role="listitem">
-        <div class="slds-form-element slds-form-element_horizontal slds-is-editing">
-        <label class="slds-form-element__label" for="single-form-element-id-03">Label</label>
-        <div class="slds-form-element__control">
-        <input type="text" id="single-form-element-id-03" placeholder="Placeholder text…" class="slds-input" />
-        </div>
-        </div>
-        </div>
-        </div>
-        <div class="slds-form__row">
-        <div class="slds-form__item" role="listitem">
-        <div class="slds-form-element slds-form-element_horizontal slds-is-editing slds-form-element_1-col">
-        <label class="slds-form-element__label" for="single-form-element-id-04">Description</label>
-        <div class="slds-form-element__control">
-        <textarea id="single-form-element-id-04" placeholder="Placeholder text…" class="slds-textarea">Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Etiam porta sem malesuada magna mollis euismod.</textarea>
-        </div>
-        </div>
-        </div>
-        </div>
-        </div>
+        <footer class="slds-card__footer">
+            Hello
+        </footer>
+    </article>
 </template>
