@@ -1,16 +1,8 @@
 .form {
     background: white;
 }
-.input {
-    border-top-style: hidden;
-    border-right-style: hidden;
-    border-left-style: hidden;
-    border-bottom-style: solid;
-    border-bottom-color: #dddbda;
-    background-color: hidden;
-    width: 100%;
-}
 
-.input:focus {
-    outline-width: 0;
+.popover {
+    left: -145px;
+    bottom: 52px;
 }
